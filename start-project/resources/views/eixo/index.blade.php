@@ -8,7 +8,7 @@
 <body>
     <h1>Tabela de eixos</h1>
     <hr>
-    <a href="">Cadastrar</a>
+    <a href="{{route('eixo.create')}}">Cadastrar</a>
     <table>
         <thead>
             <th>ID</th>
@@ -22,6 +22,8 @@
                     <td>{{$item->id}}</td>
                     <td>{{$item->nome}}</td>
                     <td>{{$item->descricao}}</td>
+                    <td><a href={{route('eixo.show', $item->id)}}>INFO</a></td>
+                    <td><a href={{route('eixo.edit', $item->id)}}>EDIT</a></td>
                 </tr>
             @endforeach
         </tbody>

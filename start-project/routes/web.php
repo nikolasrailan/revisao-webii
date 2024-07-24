@@ -17,4 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/eixo', 'App\Http\Controllers\EixoController@index');
+// Route::get('/eixo', 'App\Http\Controllers\EixoController@index');
+Route::resource('/eixo', 'App\Http\Controllers\EixoController');
