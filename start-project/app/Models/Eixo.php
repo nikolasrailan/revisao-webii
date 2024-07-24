@@ -9,6 +9,5 @@ class Eixo extends Model
 {
     use HasFactory;
 
-    protected $table = 'niko';
     //vai acessar a tabela niko e nao a eixo
 }
