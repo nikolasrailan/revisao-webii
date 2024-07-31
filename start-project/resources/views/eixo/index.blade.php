@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabela de eixos</title>
-</head>
-<body>
-    <h1>Tabela de eixos</h1>
+@extends('templates.main', ['title' => 'Tabela de eixos', 'header' => 'Eixos Cadastrados'])
+@section('content')
     <hr>
     <a href="{{route('eixo.create')}}">Cadastrar</a>
-    <table>
+    <table class="table">
         <thead>
             <th>ID</th>
             <th>Nome</th>
@@ -22,11 +15,16 @@
                     <td>{{$item->id}}</td>
                     <td>{{$item->nome}}</td>
                     <td>{{$item->descricao}}</td>
-                    <td><a href={{route('eixo.show', $item->id)}}>INFO</a></td>
-                    <td><a href={{route('eixo.edit', $item->id)}}>EDIT</a></td>
+                    <td><a class="btn btn-outline-secondary" href={{route('eixo.show', $item->id)}}>INFO</a></td>
+                    <td><a class="btn btn-outline-secondary" href={{route('eixo.edit', $item->id)}}>EDIT</a></td>
+                    <td>
+                        <form action={{route('eixo.destroy', $item->id)}} method="DELETE">
+                            @csrf
+                            <input class="btn btn-outline-secondary" type="submit" value="EXCLUIR">
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+@endsection

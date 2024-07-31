@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eixo | Create</title>
-</head>
-<body>
-    <h1>Novo eixo</h1>
+@extends('templates.main', ['title' => 'Cadastrar Eixo', 'header' => 'Novo Eixo'])
+@section('content')
     <hr>
     <a href="{{route('eixo.index')}}">Voltar</a>
     <form action={{route('eixo.store')}} method="POST">
@@ -17,6 +10,4 @@
         <textarea name="descricao" id="descricao" cols="30" rows="3"></textarea>
         <input type="submit" value="Salvar">
     </form>
-        
-</body>
-</html>
+ @endsection
