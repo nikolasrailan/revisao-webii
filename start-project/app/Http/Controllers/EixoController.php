@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Eixo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Dompdf\Dompdf;
 
 class EixoController extends Controller
 {
@@ -13,6 +15,8 @@ class EixoController extends Controller
     public function index() 
     {
         $data = Eixo::all();
+        Storage::disk('local')->put('example.txt', 'Contents');
+
         return view('eixo.index', compact('data'));
         //passar varios registro pra view, ex: compact(['data', 'aluno'])
     }
@@ -30,11 +34,19 @@ class EixoController extends Controller
      */
     public function store(Request $request)
     {
-        $eixo = new Eixo();
-        $eixo->nome = $request->nome;
-        $eixo->descricao = $request->descricao;
-        $eixo->save();
-        return redirect()->route('eixo.index');
+        if($request->hasFile('documento')){
+
+            $eixo = new Eixo();
+            $eixo->nome = $request->nome;
+            $eixo->descricao = $request->descricao;
+            $eixo->save();
+            $extensao_arq = $request->file('documento')->getClientOriginalExtension();
+            $nome_arq = $eixo->id."_".time().".".$extensao_arq;
+            $request->file('documento')->storeAs("public/", $nome_arq);
+            $eixo->url = $nome_arq;
+            $eixo->save();
+            return redirect()->route('eixo.index');
+        }
     }
 
     /**
@@ -92,8 +104,25 @@ class EixoController extends Controller
         return '<h1>EIXO NAO ENCONTRADO</h1>';
     }
 
-    public function report($eixo_id) {
-        return "<h1>$eixo_id</h1>";
+    public function report() {
+        $data = Eixo::all();
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml(view('eixo.pdf', compact('data')));
+        $dompdf->render();
+        $dompdf->stream("relatorio-horas-turma.pdf", array("Attachment" => false));
+    }
+
+    public function graph() {
+        $data = json_encode([
+            ["NOME", "TOTAL DE HORAS"],
+            ["MARIA", 150],
+            ["CARLOS", 90],
+            ["JOÃO", 232],
+            ["ANA", 197],   
+        ]);
+
+        return view('eixo.graph', compact(['data']));
     }
 
     public function form(Request $request) {

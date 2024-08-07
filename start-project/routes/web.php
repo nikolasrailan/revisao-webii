@@ -20,6 +20,6 @@ Route::get('/', function () {
 // Route::get('/eixo', 'App\Http\Controllers\EixoController@index');
 Route::resource('/eixo', 'App\Http\Controllers\EixoController');
 
-Route::get('/report/{eixo_id}', 'App\Http\Controllers\EixoController@report')->name('eixo.report');
-
-//Route::post('/form/', 'App\Http\Controller\EixoController@form');
+//Route::get('/report/{eixo_id}', 'App\Http\Controllers\EixoController@report')->name('eixo.report');
+Route::get('/report/eixo/', 'App\Http\Controllers\EixoController@report')->name('report');
+Route::get('/graph/eixo/', 'App\Http\Controllers\EixoController@graph')->name('graph');

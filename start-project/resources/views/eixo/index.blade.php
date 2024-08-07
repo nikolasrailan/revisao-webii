@@ -17,11 +17,16 @@
                     <td>{{$item->descricao}}</td>
                     <td><a class="btn btn-outline-secondary" href={{route('eixo.show', $item->id)}}>INFO</a></td>
                     <td><a class="btn btn-outline-secondary" href={{route('eixo.edit', $item->id)}}>EDIT</a></td>
+                    <td><a class="btn btn-outline-secondary" href={{asset('storage')."/".$item->url}} target='_blank'>ARQUIVO</a></td>
                     <td>
-                        <form action={{route('eixo.destroy', $item->id)}} method="DELETE">
+                        <form action={{route('eixo.destroy', $item->id)}} method="POST">
                             @csrf
+                            @method('DELETE')
                             <input class="btn btn-outline-secondary" type="submit" value="EXCLUIR">
                         </form>
+                    <a class="btn btn-outline-secondary" href={{route('report')}} target='_blank'>Relatorio</a>
+                    <a class="btn btn-outline-secondary" href={{route('graph')}}>Grafico</a>
+
                     </td>
                 </tr>
             @endforeach
