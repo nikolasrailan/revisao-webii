@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Http\Controllers\PermissionController;
+
 
 class RegisteredUserController extends Controller
 {
@@ -36,16 +38,20 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required']
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role_id' => $request->role,
         ]);
 
         event(new Registered($user));
 
+        PermissionController::loadPermission(Auth::user()->role_id);
+        
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
