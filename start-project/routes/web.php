@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EixoController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +20,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/eixo', 'App\Http\Controllers\EixoController@index');
-Route::resource('/eixo', 'App\Http\Controllers\EixoController');
-
-//Route::get('/report/{eixo_id}', 'App\Http\Controllers\EixoController@report')->name('eixo.report');
+Route::resource('/eixo', 'App\Http\Controllers\EixoController')->middleware(['auth']);
 Route::get('/report/eixo/', 'App\Http\Controllers\EixoController@report')->name('report');
 Route::get('/graph/eixo/', 'App\Http\Controllers\EixoController@graph')->name('graph');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
