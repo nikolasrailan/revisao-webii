@@ -14,6 +14,8 @@ class EixoController extends Controller
      */
     public function index() 
     {
+        $this->authorize('index', Eixo::class);
+
         $data = Eixo::all();
         Storage::disk('local')->put('example.txt', 'Contents');
 
@@ -26,6 +28,8 @@ class EixoController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Eixo::class);
+
         return view('eixo.create');
     }
 
@@ -34,6 +38,8 @@ class EixoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Eixo::class);
+
         if($request->hasFile('documento')){
 
             $eixo = new Eixo();
@@ -54,6 +60,8 @@ class EixoController extends Controller
      */
     public function show(string $id)
     {
+        $this->authorize('show', Eixo::class);
+
         $eixo = Eixo::find($id);
         if(isset($eixo)){
             return view('eixo.show', compact(['eixo']));
@@ -66,6 +74,8 @@ class EixoController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('edit', Eixo::class);
+
         $eixo = Eixo::find($id);
         if(isset($eixo)){
             return view('eixo.edit', compact(['eixo']));
@@ -79,6 +89,8 @@ class EixoController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->authorize('edit', Eixo::class);
+
         $eixo = Eixo::find($id);
         if(isset($eixo)){
             $eixo->nome = $request->nome;
@@ -95,6 +107,8 @@ class EixoController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('destroy', Eixo::class);
+
         $eixo = Eixo::find($id);
         if(isset($eixo)){
             $eixo->delete();

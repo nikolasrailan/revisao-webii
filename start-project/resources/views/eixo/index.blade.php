@@ -1,7 +1,9 @@
 @extends('templates.main', ['title' => 'Tabela de eixos', 'header' => 'Eixos Cadastrados'])
 @section('content')
     <hr>
+    @can('create', App\Models\Eixo::class)
     <a href="{{route('eixo.create')}}">Cadastrar</a>
+    @endcan
     <table class="table">
         <thead>
             <th>ID</th>
@@ -16,7 +18,9 @@
                     <td>{{$item->nome}}</td>
                     <td>{{$item->descricao}}</td>
                     <td><a class="btn btn-outline-secondary" href={{route('eixo.show', $item->id)}}>INFO</a></td>
-                    <td><a class="btn btn-outline-secondary" href={{route('eixo.edit', $item->id)}}>EDIT</a></td>
+                    @can('edit', App\Models\Eixo::class)
+                        <td><a class="btn btn-outline-secondary" href={{route('eixo.edit', $item->id)}}>EDIT</a></td>
+                    @endcan
                     <td><a class="btn btn-outline-secondary" href={{asset('storage')."/".$item->url}} target='_blank'>ARQUIVO</a></td>
                     <td>
                         <form action={{route('eixo.destroy', $item->id)}} method="POST">
