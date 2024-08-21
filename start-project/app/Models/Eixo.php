@@ -10,4 +10,8 @@ class Eixo extends Model
     use HasFactory;
 
     //vai acessar a tabela niko e nao a eixo
+
+    public function disciplinas(){
+        return $this->hasMany('App\Models\Disciplina');
+    }
 }
