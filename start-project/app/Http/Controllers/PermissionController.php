@@ -15,7 +15,7 @@ class PermissionController extends Controller
             $sess[$item->resource->name]  = (boolean) $item->permission;
         }
         session(['user_permissions' => $sess]);
-        //dd($data);
+        //dd($sess);
     }
 
     public static function isAuthorized($resource) {

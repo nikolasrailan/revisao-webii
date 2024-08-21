@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Disciplina extends Model
 {
-    use HasFactory,  SoftDeletes;
+    use HasFactory;
 
     public function eixo() {
         $this->belongsTo('\App\Models\Eixo');

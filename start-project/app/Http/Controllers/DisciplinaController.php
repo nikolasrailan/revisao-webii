@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Disciplina;
 use Illuminate\Http\Request;
 
 class DisciplinaController extends Controller
@@ -9,17 +10,26 @@ class DisciplinaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() 
     {
-        
+        $this->authorize('index', Disciplina::class);
+
+        $data = Disciplina::all();
+        //Storage::disk('local')->put('example.txt', 'Contents');
+
+        return view('disciplina.index', compact('data'));
+        //passar varios registro pra view, ex: compact(['data', 'aluno'])
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $this->authorize('create', Disciplina::class);
+
+        return view('disciplina.create');
     }
 
     /**
@@ -27,7 +37,20 @@ class DisciplinaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', Disciplina::class);
+
+        //if($request->hasFile('documento')){
+
+            $eixo = new Disciplina();
+            $eixo->nome = $request->nome;
+            $eixo->save();
+            //$extensao_arq = $request->file('documento')->getClientOriginalExtension();
+            //$nome_arq = $eixo->id."_".time().".".$extensao_arq;
+            //$request->file('documento')->storeAs("public/", $nome_arq);
+            //$eixo->url = $nome_arq;
+            //$eixo->save();
+            return redirect()->route('disciplina.index');
+        //}
     }
 
     /**
@@ -35,7 +58,13 @@ class DisciplinaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $this->authorize('show', Disciplina::class);
+
+        $eixo = Disciplina::find($id);
+        if(isset($disciplina)){
+            return view('disciplina.show', compact(['disciplina']));
+        }
+        return '<h1>Disciplina não encontrado</h1>';
     }
 
     /**
@@ -43,7 +72,13 @@ class DisciplinaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $this->authorize('edit', Disciplina::class);
+
+        $eixo = Disciplina::find($id);
+        if(isset($disciplina)){
+            return view('sisciplina.edit', compact(['disciplina']));
+        }
+        return '<h1>Disciplina não encontrado</h1>';
     }
 
     /**

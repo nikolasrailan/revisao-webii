@@ -15,7 +15,7 @@ class UserSeeder extends Seeder {
             [
                 // COORDENADOR
                 "name" => "niko", 
-                "email" => "niko@niko", 
+                "email" => "niko@niko.com", 
                 "password" => Hash::make('nikoniko'), 
                 "role_id" => 1,
             ],
