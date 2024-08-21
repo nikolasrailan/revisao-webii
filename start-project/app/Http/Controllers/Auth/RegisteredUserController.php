@@ -49,8 +49,6 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-
-        PermissionController::loadPermission(Auth::user()->role_id);
         
         Auth::login($user);
 

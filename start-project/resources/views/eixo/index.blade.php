@@ -2,7 +2,8 @@
 @section('content')
     <hr>
     @can('create', App\Models\Eixo::class)
-    <a href="{{route('eixo.create')}}">Cadastrar</a>
+    
+    <a href="{{route('eixo.create')}}" class="btn btn-primary">Cadastrar </a>
     @endcan
     <table class="table">
         <thead>
@@ -20,16 +21,18 @@
                     <td><a class="btn btn-outline-secondary" href={{route('eixo.show', $item->id)}}>INFO</a></td>
                     @can('edit', App\Models\Eixo::class)
                         <td><a class="btn btn-outline-secondary" href={{route('eixo.edit', $item->id)}}>EDIT</a></td>
-                    @endcan
-                    <td><a class="btn btn-outline-secondary" href={{asset('storage')."/".$item->url}} target='_blank'>ARQUIVO</a></td>
-                    <td>
-                        <form action={{route('eixo.destroy', $item->id)}} method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input class="btn btn-outline-secondary" type="submit" value="EXCLUIR">
-                        </form>
-                    <a class="btn btn-outline-secondary" href={{route('report')}} target='_blank'>Relatorio</a>
-                    <a class="btn btn-outline-secondary" href={{route('graph')}}>Grafico</a>
+                    
+                        <td><a class="btn btn-outline-secondary" href={{asset('storage')."/".$item->url}} target='_blank'>ARQUIVO</a></td>
+                        
+                        <td>
+                            <form action={{route('eixo.destroy', $item->id)}} method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input class="btn btn-outline-secondary" type="submit" value="EXCLUIR">
+                            </form>
+                            <a class="btn btn-outline-secondary" href={{route('report')}} target='_blank'>Relatorio</a>
+                            <a class="btn btn-outline-secondary" href={{route('graph')}}>Grafico</a>
+                            @endcan
 
                     </td>
                 </tr>
