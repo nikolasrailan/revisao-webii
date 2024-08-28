@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Disciplina;
+use App\Models\Curso;
+use App\Models\Eixo;
 use Illuminate\Http\Request;
 
-class DisciplinaController extends Controller
+class CursoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index() 
     {
-        $this->authorize('index', Disciplina::class);
+        $this->authorize('index', Curso::class);
 
-        $data = Disciplina::all();
+        $data = Curso::all();
         //Storage::disk('local')->put('example.txt', 'Contents');
-
-        return view('disciplina.index', compact('data'));
+        //$data = Disciplina::with('eixo')->get();
+        return view('curso.index', compact('data'));
         //passar varios registro pra view, ex: compact(['data', 'aluno'])
     }
 
@@ -27,9 +28,10 @@ class DisciplinaController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Disciplina::class);
+        $this->authorize('create', Curso::class);
+        $data = Eixo::all();
 
-        return view('disciplina.create');
+        return view('curso.create', compact('data'));
     }
 
     /**
@@ -37,19 +39,21 @@ class DisciplinaController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', Disciplina::class);
+        $this->authorize('create', Curso::class);
 
         //if($request->hasFile('documento')){
 
-            $eixo = new Disciplina();
-            $eixo->nome = $request->nome;
-            $eixo->save();
+            $curso = new Curso();
+            // dd($request);
+            $curso->nome = $request->nome;
+            $curso->eixo_id = $request->eixo;
+            $curso->save();
             //$extensao_arq = $request->file('documento')->getClientOriginalExtension();
             //$nome_arq = $eixo->id."_".time().".".$extensao_arq;
             //$request->file('documento')->storeAs("public/", $nome_arq);
             //$eixo->url = $nome_arq;
             //$eixo->save();
-            return redirect()->route('disciplina.index');
+            return redirect()->route('curso.index');
         //}
     }
 
@@ -58,13 +62,13 @@ class DisciplinaController extends Controller
      */
     public function show(string $id)
     {
-        $this->authorize('show', Disciplina::class);
+        $this->authorize('show', Curso::class);
 
-        $eixo = Disciplina::find($id);
-        if(isset($disciplina)){
-            return view('disciplina.show', compact(['disciplina']));
+        $curso = Curso::find($id);
+        if(isset($curso)){
+            return view('curso.show', compact(['curso']));
         }
-        return '<h1>Disciplina não encontrado</h1>';
+        return '<h1>Curso não encontrado</h1>';
     }
 
     /**
@@ -72,13 +76,13 @@ class DisciplinaController extends Controller
      */
     public function edit(string $id)
     {
-        $this->authorize('edit', Disciplina::class);
+        $this->authorize('edit', Curso::class);
 
-        $eixo = Disciplina::find($id);
-        if(isset($disciplina)){
-            return view('sisciplina.edit', compact(['disciplina']));
+        $eixo = curso::find($id);
+        if(isset($curso)){
+            return view('curso.edit', compact(['curso']));
         }
-        return '<h1>Disciplina não encontrado</h1>';
+        return '<h1>curso não encontrado</h1>';
     }
 
     /**

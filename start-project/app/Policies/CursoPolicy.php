@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\Http\Controllers\PermissionController;
 use App\Models\User;
 
-class DisciplinaPolicy
+class CursoPolicy
 {
     /**
      * Create a new policy instance.
@@ -17,19 +17,19 @@ class DisciplinaPolicy
 
 
     public function index() {
-        return PermissionController::isAuthorized('disciplina.index');
+        return PermissionController::isAuthorized('curso.index');
     }
 
     public function create() {
-        return PermissionController::isAuthorized('disciplina.create');
+        return PermissionController::isAuthorized('curso.create');
     }
     public function edit() {
-        return PermissionController::isAuthorized('disciplina.edit');
+        return PermissionController::isAuthorized('curso.edit');
     }
     public function show() {
-        return PermissionController::isAuthorized('disciplina.show');
+        return PermissionController::isAuthorized('curso.show');
     }
     public function destroy() {
-        return PermissionController::isAuthorized('disciplina.destroy');
+        return PermissionController::isAuthorized('curso.destroy');
     }
 }

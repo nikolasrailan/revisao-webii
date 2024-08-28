@@ -11,7 +11,7 @@ class Eixo extends Model
 
     //vai acessar a tabela niko e nao a eixo
 
-    public function disciplinas(){
-        return $this->hasMany('App\Models\Disciplina');
+    public function cursos(){
+        return $this->hasMany('App\Models\Curso');
     }
 }
