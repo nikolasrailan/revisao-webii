@@ -13,4 +13,8 @@ class Curso extends Model
     public function eixo() {
         $this->belongsTo('\App\Models\Eixo');
     }
+
+    public function cursos(){
+        return $this->hasMany('App\Models\Curso');
+    }
 }

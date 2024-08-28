@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Eixo extends Model
+class Disciplina extends Model
 {
     use HasFactory;
 
-    public function cursos(){
-        return $this->hasMany('App\Models\Curso');
+    public function eixo() {
+        $this->belongsTo('\App\Models\Eixo');
     }
 }

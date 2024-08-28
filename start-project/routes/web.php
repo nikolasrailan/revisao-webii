@@ -26,6 +26,8 @@ Route::get('/graph/eixo/', 'App\Http\Controllers\EixoController@graph')->name('g
 
 Route::resource('/curso', 'App\Http\Controllers\CursoController')->middleware(['auth']);
 
+Route::resource('/disciplina', 'App\Http\Controllers\DisciplinaController')->middleware(['auth']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -21,7 +21,13 @@ class ResourceSeeder extends Seeder
             ["name" => "curso.create"],                
             ["name" => "curso.edit"],                
             ["name" => "curso.show"],                
-            ["name" => "curso.destroy"],                 
+            ["name" => "curso.destroy"],  
+            //----------------
+            ["name" => "disciplina.index"],                
+            ["name" => "disciplina.create"],                
+            ["name" => "disciplina.edit"],                
+            ["name" => "disciplina.show"],                
+            ["name" => "disciplina.destroy"],  
         ];
         DB::table('resources')->insert($data);
     }
