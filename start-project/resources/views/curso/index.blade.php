@@ -3,7 +3,7 @@
     <hr>
     @can('create', App\Models\Curso::class)
     
-    <a href="{{route('curso.create')}}" class="btn btn-primary">Cadastrar</a>
+    <a href="{{route('curso.create')}}" class="btn btn-primary">Cadastrar</a>   
     @endcan
     <table class="table">
         <thead>
