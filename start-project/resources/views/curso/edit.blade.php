@@ -18,7 +18,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="eixo" class="form-label">Eixo</label>
-                                <select class="form-select" name="eixo" id="eixo" required>
+                                <select disabled class="form-select" name="eixo" id="eixo" required>
                                     <option selected disabled value="">Selecione um eixo</option>
                                     @foreach ($eixo as $item)
                                         <option {{$curso->eixo_id == $item->id ? 'selected' : ''}} value="{{ $item->id }}">{{ $item->nome }}</option>

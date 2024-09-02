@@ -29,7 +29,7 @@ class DisciplinaController extends Controller
         $this->authorize('create', Disciplina::class);
         $data = Curso::all();
 
-        return view('curso.create', compact('data'));
+        return view('disciplina.create', compact('data'));
     }
 
     /**

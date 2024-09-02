@@ -19,20 +19,8 @@
                 <li class="nav-item"><a class="nav-link" href={{route('eixo.index')}}>Eixos</a></li>
                 <li class="nav-item"><a class="nav-link" href={{route('curso.index')}}>Cursos</a></li>
                 <li class="nav-item"><a class="nav-link" href={{route('disciplina.index')}}>Disciplina</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                        <li><a class="dropdown-item" href="blog-home.html">Blog Home</a></li>
-                        <li><a class="dropdown-item" href="blog-post.html">Blog Post</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Portfolio</a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
-                        <li><a class="dropdown-item" href="portfolio-overview.html">Portfolio Overview</a></li>
-                        <li><a class="dropdown-item" href="portfolio-item.html">Portfolio Item</a></li>
-                    </ul>
-                </li>
+               
+                
             </ul>
         </div>
     </div>
