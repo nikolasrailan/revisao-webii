@@ -65,8 +65,9 @@ class CursoController extends Controller
         $this->authorize('show', Curso::class);
 
         $curso = Curso::find($id);
+        $eixo = Eixo::find($curso->eixo_id);
         if(isset($curso)){
-            return view('curso.show', compact(['curso']));
+            return view('curso.show', compact('curso', 'eixo'));
         }
         return '<h1>Curso não encontrado</h1>';
     }

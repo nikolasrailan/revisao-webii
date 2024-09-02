@@ -59,7 +59,14 @@ class DisciplinaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $this->authorize('show', Disciplina::class);
+
+        $disciplina = Disciplina::find($id);
+        $curso = Curso::find($disciplina->curso_id);
+        if(isset($disciplina)){
+            return view('disciplina.show', compact('disciplina', 'curso'));
+        }
+        return '<h1>disciplina não encontrado</h1>';
     }
 
     /**
@@ -101,3 +108,5 @@ class DisciplinaController extends Controller
         //
     }
 }
+
+
