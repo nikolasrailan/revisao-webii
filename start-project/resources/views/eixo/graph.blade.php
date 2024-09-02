@@ -1,4 +1,4 @@
-@extends('templates.main', ['title' => 'Grafico Eixo', 'header' => 'Grafico Eixo'])
+@extends('templates.main', ['title' => 'Gráfico de Eixos', 'header' => 'Gráfico de Eixos'])
 @section('content')
     <div class="row">
         <div class="col text-center" id="barra" style="width: 420px; height: 280px;"></div>
@@ -11,20 +11,19 @@
     </div>
 
     <script type="text/javascript">
-        var data_graph = <?php echo $data ?>;
-        google.charts.load('current', {'packages':['corechart']})
+        var data_graph = {!! $data !!}; 
+        google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
+
         function drawChart() {
-            // Dados do Gráfico
             let data = google.visualization.arrayToDataTable(data_graph);
-            // GRÁFICO DE BARRAS
-            // Opções de Configuração
-            options = {
-                title: 'TOTAL DE HORAS DOS ALUNOS',
+
+            let optionsBarra = {
+                title: 'Quantidade de Eixos, Cursos e Disciplinas',
                 colors: ['#198754'],
                 legend: 'none',
                 hAxis: {
-                    title: 'Horas Validadas',
+                    title: 'Quantidade',
                     titleTextStyle: {
                         fontSize: 12,
                         bold: true,
@@ -33,11 +32,17 @@
                 vAxis: {
                 },
             };
-            
-            chart = new google.visualization.BarChart(document.getElementById('barra'));
-            chart.draw(data, options);
+            let chartBarra = new google.visualization.BarChart(document.getElementById('barra'));
+            chartBarra.draw(data, optionsBarra);
+
+            let optionsPizza = {
+                title: 'Distribuição de Eixos, Cursos e Disciplinas',
+                is3D: true,
+            };
+            let chartPizza = new google.visualization.PieChart(document.getElementById('pizza'));
+            chartPizza.draw(data, optionsPizza);
+
             
         }
     </script>
- @endsection
-
+@endsection

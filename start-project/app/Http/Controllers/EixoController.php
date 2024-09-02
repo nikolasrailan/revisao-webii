@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Eixo;
+use App\Models\Curso;
+use App\Models\Disciplina;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Dompdf\Dompdf;
@@ -119,25 +121,34 @@ class EixoController extends Controller
     }
 
     public function report() {
-        $data = Eixo::all();
-
+        $eixos = Eixo::all();
+        $cursos = Curso::all();
+        $disciplinas = Disciplina::all();
+    
         $dompdf = new Dompdf();
-        $dompdf->loadHtml(view('eixo.pdf', compact('data')));
+    
+        $dompdf->loadHtml(view('eixo.pdf', compact('eixos', 'cursos', 'disciplinas')));
         $dompdf->render();
-        $dompdf->stream("relatorio-horas-turma.pdf", array("Attachment" => false));
+    
+        return $dompdf->stream("relatorio-geral.pdf", array("Attachment" => false));
     }
+    
 
     public function graph() {
+        $eixoCount = Eixo::count();
+        $cursoCount = Curso::count();
+        $disciplinaCount = Disciplina::count();
+    
         $data = json_encode([
-            ["NOME", "TOTAL DE HORAS"],
-            ["MARIA", 150],
-            ["CARLOS", 90],
-            ["JOÃO", 232],
-            ["ANA", 197],   
+            ["Categoria", "Quantidade"],
+            ["Eixos", $eixoCount],
+            ["Cursos", $cursoCount],
+            ["Disciplinas", $disciplinaCount],
         ]);
-
-        return view('eixo.graph', compact(['data']));
+    
+        return view('eixo.graph', compact('data'));
     }
+    
 
     public function form(Request $request) {
         //return $request->all();
