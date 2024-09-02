@@ -20,14 +20,9 @@
                     @can('edit', App\Models\Disciplina::class)
                         <td><a class="btn btn-outline-secondary" href={{route('disciplina.edit', $item->id)}}>EDIT</a></td>
                     
-                        <td>
-                            <form action={{route('disciplina.destroy', $item->id)}} method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input class="btn btn-outline-secondary" type="submit" value="EXCLUIR">
-                            </form>
-                            @endcan
-                    </td>
+                        
+                    @endcan
+                   
                 </tr>
             @endforeach
         </tbody>

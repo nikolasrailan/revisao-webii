@@ -67,7 +67,14 @@ class DisciplinaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $this->authorize('edit', Disciplina::class);
+
+        $disciplina = Disciplina::find($id);
+        $curso = Curso::all();
+        if(isset($disciplina)){
+            return view('disciplina.edit', compact('disciplina', 'curso'));
+        }
+        return '<h1>disciplina não encontrado</h1>';
     }
 
     /**
@@ -75,7 +82,15 @@ class DisciplinaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->authorize('edit', Eixo::class);
+
+        $disciplina = Disciplina::find($id);
+        if(isset($disciplina)){
+            $disciplina->nome = $request->nome;
+            $disciplina->save();
+            return redirect()->route('disciplina.index');
+        }
+        return '<h1>disciplina não encontrado</h1>';
     }
 
     /**

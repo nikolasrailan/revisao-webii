@@ -22,7 +22,6 @@
                     @can('edit', App\Models\Eixo::class)
                         <td><a class="btn btn-outline-secondary" href={{route('eixo.edit', $item->id)}}>EDIT</a></td>
                     
-                        <td><a class="btn btn-outline-secondary" href={{asset('storage')."/".$item->url}} target='_blank'>ARQUIVO</a></td>
                         
                         <td>
                             <form action={{route('eixo.destroy', $item->id)}} method="POST">
